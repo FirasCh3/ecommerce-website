@@ -1,0 +1,33 @@
+<form [formGroup]="group" (ngSubmit)="submit(group)">
+  <div class="row mt-5">
+    <div class="mx-auto col-10 col-md-8 col-lg-6 b">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Name of product</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="ProductName">
+        <p class="alert alert-danger" *ngIf="group?.controls?.ProductName?.hasError('required') && group?.controls?.ProductName?.touched">Name is required</p>
+      </div><br>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Price of Product</label>
+        <input type="text" class="form-control" id="exampleFormControlInput2" formControlName="ProductPrice" (change)="FormatPrice()">
+        <p class="alert alert-danger" *ngIf="group?.controls?.ProductPrice?.hasError('required') && group?.controls?.ProductPrice?.touched ">Price is required</p>
+        <p class="alert alert-danger" *ngIf="group?.controls?.ProductPrice?.hasError('min') && group?.controls?.ProductPrice?.touched ">Price is invalid</p>
+        <p class="alert alert-danger" *ngIf="group?.controls?.ProductPrice?.hasError('pattern') && group?.controls?.ProductPrice?.touched ">Price is invalid</p>
+      </div><br>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Description of product</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="ProductDescription"></textarea>
+      </div><br>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Product image</label>
+        <input (change)="GetFile($event)" class="form-control" type="file" id="formFile" formControlName="picture">
+        <p class="alert alert-danger" *ngIf="group?.controls?.picture?.errors?.['ImageError']==true">Extension is not allowed</p>
+        <p class="alert alert-danger" *ngIf="UploadError">Error uploading the file</p>
+        <p class="alert alert-danger" *ngIf="ImageRequired">Image is required</p>
+      </div><br>
+      <p id="successAlert" [@fade]="SuccessAlert ? 'visible' : 'hidden'" [hidden]="SuccessAlert"  class="alert alert-success">Product Added successfully</p>
+      <button  type="submit" class="btn btn-success me-2" style="width: 150px">Add product</button>
+      <button type="reset" class="btn btn-danger" style="width: 150px">Reset</button>
+    </div>
+  </div>
+</form>
+

@@ -1,0 +1,72 @@
+<body class="bg-light">
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        <span class="badge bg-secondary text-dark rounded-pill">{{products.length}}</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item" *ngFor="let product of products">
+
+          <div class="float-start">
+            <h6 class="my-0">{{product.ProductName}}</h6>
+
+          </div>
+          <button class="btn btn-close float-end " (click)="remove(product.ProductId)"></button>
+          <span class="text-muted float-end mx-1 ">{{product.ProductPrice}} TND</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (TND)</span>
+          <strong>{{SumOfProducts()}}</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Billing address</h4>
+      <form [formGroup]="group">
+        <div class="row">
+          <div class=" mb-3 form-group">
+            <label for="firstName">Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" formControlName="UserName">
+            <div class="alert alert-danger" *ngIf="group?.controls?.UserName?.touched && group?.controls?.UserName?.hasError('required')">
+              Valid first name is required.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName="UserEmail">
+          <div class="alert alert-danger" *ngIf="group?.controls?.UserEmail?.touched && group?.controls?.UserEmail?.hasError('required')">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div>
+
+        <div class="mb-3 form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" formControlName="UserAdress" >
+          <div class="alert alert-danger" *ngIf="group?.controls?.UserAdress?.touched && group?.controls?.UserAdress?.hasError('required') || group?.controls?.UserAdress?.hasError('email') ">
+            Please enter your shipping address.
+          </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-success btn-lg btn-block mx-2 w-25" type="submit" (click)="AddCommand(group)">checkout</button>
+        <button class="btn btn-danger btn-lg btn-block w-25" type="reset">Reset</button>
+        <div>
+          <p [@ShowHideAnimation]="show ? true:false" class="alert alert-success mt-3">Command Successful</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">© 2017-2018 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+
+</div>
+</body>

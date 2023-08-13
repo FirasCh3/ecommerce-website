@@ -1,0 +1,61 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<div class="position-sticky top-0" id="success">
+  <p class="alert alert-success position-absolute top-0 start-50 translate-middle-x vw-100" id="add">Product Added To Cart Successfully</p>
+</div>
+<div class="position-sticky top-0" id="failure">
+  <p class="alert alert-danger position-absolute top-0 start-50 translate-middle-x vw-100" id="fail">Product Is Already In Your Cart</p>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">...</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/checkout"><i class="fa fa-shopping-cart" style="font-size:30px"></i></a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (change)="SearchProduct($event)">
+      </form>
+    </div>
+  </div>
+</nav><br><br>
+<div class="container">
+  <div class="row">
+      <div class="col-md-4 mt-3" *ngFor="let product of products">
+        <div class="card h-100">
+            <img src="./assets/{{product.ProductId}}.jpg" class="card-img-top"  alt="{{product.ProductName}}">
+          <div class="card-body">
+            <h5 class="card-title">{{product.ProductName}}</h5>
+            <p class="card-text">{{product.ProductDescription}}</p>
+            <p class="card-text">{{product.ProductPrice}} TND</p>
+          </div>
+          <div class="card-footer">
+
+            <button class="btn btn-success buy-button text-nowrap" (click)="AddToCart(product)" >BUY</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div><br>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body alert alert-success">
+        Item Added Successfully
+      </div>
+    </div>
+  </div>
+</div>
+
+
