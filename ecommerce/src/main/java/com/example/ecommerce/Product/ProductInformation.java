@@ -13,7 +13,7 @@ public class ProductInformation {
     public float ProductPrice;
     public String ProductDescription;
     @JsonBackReference
-    @ManyToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "product")
     public Set<CommandEntity> command;
 
 
